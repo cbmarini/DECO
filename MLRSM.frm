@@ -2,15 +2,14 @@
 Off Statistics;
 #include- DECO.h
 
+*
+*	User input
+*	
 #define MASSDIM "6"
 #define EOM "1"
 #define IBP "1"
 #define numFermGen "1"
 
-
-*
-*	User input
-*	
 Symbol Phi,Phid,DeL,DeLd,DeR,DeRd,QL,QLd,QR,QRd,LL,LLd,LR,LRd,B,WL,WR,G,p;
 
 Local Input = Scalar(Phi,SU2(2,2),U1(0))

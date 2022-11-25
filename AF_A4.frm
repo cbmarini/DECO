@@ -2,15 +2,14 @@
 Off Statistics;
 #include- DECO.h
 
+*
+*	User input
+*	
 #define MASSDIM "7"
 #define EOM "1"
 #define IBP "1"
 #define numFermGen "1"
 
-
-*
-*	User input
-*	
 Symbol hu,hud,hd,hdd,phiT,phiS,xi,xitilde,G,W,B,l,lb,e,eb,mu,mub,tau,taub;
 
 Local Input = 

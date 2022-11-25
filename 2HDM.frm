@@ -2,15 +2,14 @@
 Off Statistics;
 #include- DECO.h
 
+*
+*	User input
+*	
 #define MASSDIM "6"
 #define EOM "1"
 #define IBP "1"
 #define numFermGen "1"
 
-
-*
-*	User input
-*	
 Symbol h1,h1d,h2,h2d,q,qd,u,ud,d,dd,l,ld,e,ed,B,W,G,p;
 
 Local Input = Scalar(h1,SU2(2),U1(3))
