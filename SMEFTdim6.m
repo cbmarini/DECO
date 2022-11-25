@@ -1,0 +1,12 @@
+(
+      2*G^3+2*W^3+e^2*ed^2+l*ld*e*ed+l^2*ld^2+d*dd*e*ed+d*dd*l*ld+d^2*dd^2+
+      ud^2*dd*ed+u*ud*e*ed+u*ud*l*ld+2*u*ud*d*dd+u^2*d*e+u^2*ud^2+qd*d*l*ed+
+      qd*ud*dd*ld+2*qd*u*ld*e+qd^2*ud*ed+2*qd^2*u*d+qd^3*ld+q*dd*ld*e+2*q*ud*
+      l*ed+q*u*d*l+q*qd*e*ed+2*q*qd*l*ld+2*q*qd*d*dd+2*q*qd*u*ud+2*q^2*ud*dd+
+      q^2*u*e+2*q^2*qd^2+q^3*l+hd*l*ed*W+hd*qd*u*G+hd*qd*u*W+hd*q*dd*G+hd*q*
+      dd*W+hd^2*u*dd*p+h*ld*e*W+h*qd*d*G+h*qd*d*W+h*q*ud*G+h*q*ud*W+2*h*hd*
+      G^2+2*h*hd*W^2+h*hd*e*ed*p+2*h*hd*l*ld*p+h*hd*d*dd*p+h*hd*u*ud*p+2*h*hd
+      *q*qd*p+h*hd^2*l*ed+h*hd^2*qd*u+h*hd^2*q*dd+h^2*ud*d*p+h^2*hd*ld*e+h^2*
+      hd*qd*d+h^2*hd*q*ud+2*h^2*hd^2*p^2+h^3*hd^3+B*hd*l*ed+B*hd*qd*u+B*hd*q*
+      dd+B*h*ld*e+B*h*qd*d+B*h*q*ud+2*B*h*hd*W+2*B^2*h*hd
+)
