@@ -27,7 +27,8 @@ Symbol i,ii,jj,field,rep,mass,n,B,maxn;
 *
 *******************************************************
 .sort
-
+#write "Running DECO 1.0."
+.sort
 *
 *	Variable that keeps track of mass dimension
 *
