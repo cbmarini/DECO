@@ -1,3 +1,4 @@
+*--#[ Declarations: 
 *
 *	Declarations
 *
@@ -14,10 +15,8 @@ CFunction Scal,Scalar,Grav,Gravity,FIELD,fill,f,FieldStrength,FS,R,DF;
 Autodeclare CFunction char,spin,LH,RH,Dirac;
 Autodeclare Symbol x,y,z,rep,w,im,var,r,p;
 Symbol i,ii,jj,field,rep,mass,n,B,maxn;
-
-
-
-
+*--#]
+*--#[ HilbertSeries: 
 #procedure HilbertSeries(p)
 *******************************************************
 *
@@ -188,12 +187,8 @@ id Gravity(field?,n?) = field^n;
 #enddo
 
 #endprocedure
-
-
-
-
-
-
+*--#]
+*--#[ momentumP:
 #procedure momentumP
 *******************************************************
 *
@@ -223,13 +218,8 @@ Fillexpression Momentum = P(fill);
 Drop P;
 .sort: momentum generating function done;
 #endprocedure
-
-
-
-
-
-
-
+*--#]
+*--#[ expandPE:
 #procedure expandPE(field)
 *******************************************************
 *
@@ -275,12 +265,8 @@ Unhide;
 Drop `field'ArgumentPE;
 .sort: `field' PE expanded; 
 #endprocedure
-
-
-
-
-
-
+*--#]
+*--#[ multiplyPE:
 #procedure multiplyPE
 *******************************************************
 *
@@ -326,12 +312,8 @@ Drop FieldStrengthPE;
 Drop FermionPE;
 .sort
 #endprocedure
-
-
-
-
-
-
+*--#]
+*--#[ SO31symmetry:
 #procedure SO31symmetry
 **************************************************************************
 *       Lorentz symmetry
@@ -455,16 +437,8 @@ Local HS = HS[1] - HS[y2^(-2)];
 .sort
 
 #endprocedure
-
-
-
-
-
-
-
-
-
-
+*--#]
+*--#[ SU2symmetry: 
 #procedure SU2symmetry
 *******************************************************
 *
@@ -497,15 +471,8 @@ Brackets+ y;
 Local HS = HS[1] - HS[y^(-2)];
 .sort
 #endprocedure
-
-
-
-
-
-
-
-
-
+*--#]
+*--#[ U1symmetry:
 #procedure U1symmetry
 *******************************************************
 *
@@ -523,14 +490,8 @@ Brackets+ x;
 Local HS = HS[1];
 .sort
 #endprocedure
-
-
-
-
-
-
-
-
+*--#]
+*--#[ SU3symmetry: 
 #procedure SU3symmetry
 *******************************************************
 *
@@ -583,14 +544,8 @@ Local HS = HS[z2^(-1)];
 .sort
 
 #endprocedure
-
-
-
-
-
-
-
-
+*--#]
+*--#[ A4symmetry: 
 #procedure A4symmetry
 *******************************************************
 *
@@ -619,15 +574,8 @@ id w^3 = 1;
 id w^2 = -1-w;
 .sort
 #endprocedure
-
-
-
-
-
-
-
-
-
+*--#]
+*--#[ S4symmetry: 
 #procedure S4symmetry
 *******************************************************
 *
@@ -664,12 +612,8 @@ id w^3 = 1;
 id w^2 = -1-w;
 .sort
 #endprocedure
-
-
-
-
-
-
+*--#]
+*--#[ Znsymmetry: 
 #procedure Znsymmetry
 *******************************************************
 *
@@ -687,13 +631,8 @@ id w^$maxn = 1;
 id w = 0;
 .sort
 #endprocedure
-
-
-
-
-
-
-
+*--#]
+*--#[ U1Rsymmetry: 
 #procedure U1Rsymmetry
 *******************************************************
 *
@@ -713,14 +652,8 @@ Brackets+ xr;
 Local HS = HS[xr^$rem];
 .sort
 #endprocedure
-
-
-
-
-
-
-
-
+*--#]
+*--#[ terminate: 
 #procedure terminate(group)
 *******************************************************
 *
@@ -738,16 +671,8 @@ if (match(char`group'(?x))) $terminate = 1;
 .sort
 	
 #endprocedure
-
-
-
-
-
-
-
-
-
-
+*--#]
+*--#[ counting:
 #procedure counting(HS)
 *****************************************************************
 * This procedure counts the number of operators in the Local
@@ -770,10 +695,8 @@ if (match(char`group'(?x))) $terminate = 1;
         Unhide `HS';
         .sort
 #endprocedure
-
-
-
-
+*--#]
+*--#[ saveto: 
 #procedure saveto(expr, file)
 *****************************************************************
 * Save a given Local expression `expr' to a Mathematica 
@@ -785,3 +708,4 @@ if (match(char`group'(?x))) $terminate = 1;
     #write <`file'> "(\n      %E\n)" `expr';
     #close <`file'>
 #endprocedure
+*--#]
