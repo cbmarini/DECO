@@ -460,6 +460,12 @@ id charSU2(1,n?) = 1;
         .sort
 #enddo
 
+#do i=1,1
+        id, once charSU2(4,n?) = y^(3*n)+y^(1*n)+y^(-1*n)+y^(-3*n);
+        if ( match(charSU2(4,n?)) ) redefine i "0";
+        .sort
+#enddo
+
 #call terminate(SU2)
 
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
