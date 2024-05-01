@@ -15,7 +15,7 @@ CFunction Scal,Scalar,Grav,Gravity,FIELD,fill,f,FieldStrength,FS,R,DF;
 Autodeclare CFunction char,spin,LH,RH,Dirac;
 Autodeclare Symbol x,y,z,rep,w,im,var,r,p;
 Symbol i,ii,jj,field,rep,mass,n,B,maxn;
-Symbol [3B],[6B];
+Symbol [3B],[6B],[10B];
 *--#]
 *--#[ HilbertSeries: 
 #procedure HilbertSeries(p)
@@ -542,8 +542,22 @@ id charSU3(1,n?) = 1;
        .sort
 #enddo
 
-#call terminate(SU3)
+*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*       Character of 10 dimensional representation (10 & [10B])
+*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#do i=1,1
+        id, once charSU3(10,n?) = 1+z1^(3*n)+z2^(-3*n)+z1^(2*n)/z2^n+z2^n/z1^(2*n)+z2^(3*n)/z1^(3*n)+z1^n*(z2^(-2*n)+z2^n)+(z2^(-n)+z2^(2*n))/z1^n;
+        if ( match(charSU3(10,n?)) ) redefine i "0";
+        .sort
+#enddo
 
+#do i=1,1
+        id, once charSU3([10B],n?) = 1+z1^(-3*n)+z1^(3*n)/z2^(3*n)+z1^n/z2^(2*n)+1/(z1^n*z2^n)+z1^(2*n)/z2^n+z2^n/z1^(2*n)+z1^n*z2^n+z2^(2*n)/z1^n+z2^(3*n);
+        if ( match(charSU3([10B],n?)) ) redefine i "0";
+        .sort
+#enddo
+
+#call terminate(SU3)
 
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 *       Residue of SU(3)
