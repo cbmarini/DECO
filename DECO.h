@@ -15,7 +15,7 @@ CFunction Scal,Scalar,Grav,Gravity,FIELD,fill,f,FieldStrength,FS,R,DF;
 Autodeclare CFunction char,spin,LH,RH,Dirac;
 Autodeclare Symbol x,y,z,rep,w,im,var,r,p;
 Symbol i,ii,jj,field,rep,mass,n,B,maxn;
-Symbol [3B],[6B],[10B],[15B];
+Symbol B3,B6,B10,B15;
 *--#]
 *--#[ HilbertSeries: 
 #procedure HilbertSeries(p)
@@ -518,6 +518,7 @@ id charSU3(1,n?) = 1;
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 *       Character of anti fundamental representation (B)
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+id charSU3(B3,n?) = charSU3(B,n);
 #do i=1,1
         id, once charSU3(B,n?) = 1/z1^n + z1^n/z2^n + z2^n;
         if ( match(charSU3(B,n?)) ) redefine i "0";
@@ -525,7 +526,7 @@ id charSU3(1,n?) = 1;
 #enddo
 
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*       Character of 6 dimensional representation (6 & [6B])
+*       Character of 6 dimensional representation (6 & B6)
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #do i=1,1
         id, once charSU3(6,n?) = z1^(-n)+z1^(2*n)+z2^(-2*n)+z1^n/z2^n+z2^n+z2^(2*n)/z1^(2*n);
@@ -534,8 +535,8 @@ id charSU3(1,n?) = 1;
 #enddo
 
 #do i=1,1
-        id, once charSU3([6B],n?) = z1^(-2*n)+z1^n+z1^(2*n)/z2^(2*n)+z2^(-n)+z2^n/z1^n+z2^(2*n);
-        if ( match(charSU3([6B],n?)) ) redefine i "0";
+        id, once charSU3(B6,n?) = z1^(-2*n)+z1^n+z1^(2*n)/z2^(2*n)+z2^(-n)+z2^n/z1^n+z2^(2*n);
+        if ( match(charSU3(B6,n?)) ) redefine i "0";
         .sort
 #enddo
 
@@ -549,7 +550,7 @@ id charSU3(1,n?) = 1;
 #enddo
 
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*       Character of 10 dimensional representation (10 & [10B])
+*       Character of 10 dimensional representation (10 & B10)
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #do i=1,1
         id, once charSU3(10,n?) = 1+z1^(3*n)+z2^(-3*n)+z1^(2*n)/z2^n+z2^n/z1^(2*n)+z2^(3*n)/z1^(3*n)+z1^n*(z2^(-2*n)+z2^n)+(z2^(-n)+z2^(2*n))/z1^n;
@@ -558,13 +559,13 @@ id charSU3(1,n?) = 1;
 #enddo
 
 #do i=1,1
-        id, once charSU3([10B],n?) = 1+z1^(-3*n)+z1^(3*n)/z2^(3*n)+z1^n/z2^(2*n)+1/(z1^n*z2^n)+z1^(2*n)/z2^n+z2^n/z1^(2*n)+z1^n*z2^n+z2^(2*n)/z1^n+z2^(3*n);
-        if ( match(charSU3([10B],n?)) ) redefine i "0";
+        id, once charSU3(B10,n?) = 1+z1^(-3*n)+z1^(3*n)/z2^(3*n)+z1^n/z2^(2*n)+1/(z1^n*z2^n)+z1^(2*n)/z2^n+z2^n/z1^(2*n)+z1^n*z2^n+z2^(2*n)/z1^n+z2^(3*n);
+        if ( match(charSU3(B10,n?)) ) redefine i "0";
         .sort
 #enddo
 
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*       Character of 15 dimensional representation (15 & [15B])
+*       Character of 15 dimensional representation (15 & B15)
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #do i=1,1
         id, once charSU3(15,n?) = 2/z2^n+z1^(3*n)/z2^n+z2^(2*n)+z2^(2*n)/z1^(3*n)+z1^n*(2+z2^(-3*n))+z1^(2*n)*(z2^(-2*n)+z2^n)+(z2^(-2*n)+2*z2^n)/z1^n+(1+z2^(3*n))/z1^(2*n);
@@ -573,8 +574,8 @@ id charSU3(1,n?) = 1;
 #enddo
 
 #do i=1,1
-        id, once charSU3([15B],n?) = 2/z1^n+z1^(2*n)+z1^(2*n)/z2^(3*n)+z2^(-2*n)+z1^(3*n)/z2^(2*n)+1/(z1^(2*n)*z2^n)+(2*z1^n)/z2^n+2*z2^n+z2^n/z1^(3*n)+z2^(2*n)/z1^(2*n)+z1^n*z2^(2*n)+z2^(3*n)/z1^n;
-        if ( match(charSU3([15B],n?)) ) redefine i "0";
+        id, once charSU3(B15,n?) = 2/z1^n+z1^(2*n)+z1^(2*n)/z2^(3*n)+z2^(-2*n)+z1^(3*n)/z2^(2*n)+1/(z1^(2*n)*z2^n)+(2*z1^n)/z2^n+2*z2^n+z2^n/z1^(3*n)+z2^(2*n)/z1^(2*n)+z1^n*z2^(2*n)+z2^(3*n)/z1^n;
+        if ( match(charSU3(B15,n?)) ) redefine i "0";
         .sort
 #enddo
 
