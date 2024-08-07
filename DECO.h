@@ -2,13 +2,7 @@
 *
 *	Declarations
 *
-#define DEFScalar "0"
-#define DEFFermion "0"
-#define DEFLHFermion "0"
-#define DEFRHFermion "0"
-#define DEFDiracFermion "0"
-#define DEFFieldStrength "0"
-#define DEFGravity "0"
+#define DEFHS "0"
 
 CFunction SU3, SU2, U1, U1R, S4, A4, Zn;
 CFunction Scal,Scalar,Grav,Gravity,FIELD,fill,f,FieldStrength,FS,R,DF;
@@ -27,8 +21,24 @@ Symbol B3,B6,B10,B15;
 *
 *******************************************************
 .sort
-#write "Running DECO 1.0."
-.sort
+*
+*       The following preprocessor variables are reset to zero
+*       in case one runs the HilbertSeries procedure more than 
+*       from the same FORM program.
+*
+#if (`DEFHS' == 1)
+    Drop HS;
+    .sort
+#else
+	#write "Running DECO 1.0."
+#endif
+#redefine DEFScalar "0"
+#redefine DEFFermion "0"
+#redefine DEFLHFermion "0"
+#redefine DEFRHFermion "0"
+#redefine DEFDiracFermion "0"
+#redefine DEFFieldStrength "0"
+#redefine DEFGravity "0"
 *
 *	Variable that keeps track of mass dimension
 *
@@ -81,7 +91,10 @@ id charZn(?x) = charZntmp(?x);
 *	Construct the plethystic exponentials
 *	This is done in a separate procedure
 *
-#call momentumP
+#if (`DEFHS' == 0)
+        #redefine DEFHS "1"
+        #call momentumP
+#endif
 
 #do field={Scalar,FieldStrength,Fermion,Gravity}
 	#if (`DEF`field'')
