@@ -9,7 +9,7 @@ CFunction Scal,Scalar,Grav,Gravity,FIELD,fill,f,FieldStrength,FS,R,DF;
 Autodeclare CFunction char,spin,LH,RH,Dirac;
 Autodeclare Symbol x,y,z,rep,w,im,var,r,p;
 Symbol i,ii,jj,field,rep,mass,n,B,maxn;
-Symbol B3,B6,B10,B15,Bp15,B21,B24,B28;
+Symbol B3,B6,B10,B15,Bp15,B21,B24,B28,B35;
 *--#]
 *--#[ HilbertSeries: 
 #procedure HilbertSeries(p)
@@ -655,6 +655,21 @@ id charSU3(B3,n?) = charSU3(B,n);
 #do i=1,1
         id, once charSU3(B28,n?) = 1+z1^(-6*n)+z1^(-3*n)+z1^(3*n)+z1^(6*n)/z2^(6*n)+z1^(4*n)/z2^(5*n)+z1^(2*n)/z2^(4*n)+z1^(5*n)/z2^(4*n)+z2^(-3*n)+z1^(3*n)/z2^(3*n)+1/(z1^(2*n)*z2^(2*n))+z1^n/z2^(2*n)+z1^(4*n)/z2^(2*n)+1/(z1^(4*n)*z2^n)+1/(z1^n*z2^n)+z1^(2*n)/z2^n+z2^n/z1^(5*n)+z2^n/z1^(2*n)+z1^n*z2^n+z2^(2*n)/z1^(4*n)+z2^(2*n)/z1^n+z1^(2*n)*z2^(2*n)+z2^(3*n)+z2^(3*n)/z1^(3*n)+z2^(4*n)/z1^(2*n)+z1^n*z2^(4*n)+z2^(5*n)/z1^n+z2^(6*n);
         if ( match(charSU3(B28,n?)) ) redefine i "0";
+        .sort
+#enddo
+
+*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*       Character of 35 dimensional representation (35 & B35)
+*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#do i=1,1
+        id, once charSU3(35,n?) = 2+z1^(-3*n)+2*z1^(3*n)+z1^n/z2^(5*n)+1/(z1^n*z2^(4*n))+z1^(2*n)/z2^(4*n)+2/z2^(3*n)+z1^(3*n)/z2^(3*n)+1/(z1^(2*n)*z2^(2*n))+(2*z1^n)/z2^(2*n)+z1^(4*n)/z2^(2*n)+2/(z1^n*z2^n)+(2*z1^(2*n))/z2^n+z1^(5*n)/z2^n+(2*z2^n)/z1^(2*n)+2*z1^n*z2^n+z1^(4*n)*z2^n+z2^(2*n)/z1^(4*n)+(2*z2^(2*n))/z1^n+z1^(2*n)*z2^(2*n)+z2^(3*n)+(2*z2^(3*n))/z1^(3*n)+z2^(4*n)/z1^(5*n)+z2^(4*n)/z1^(2*n)+z2^(5*n)/z1^(4*n);
+        if ( match(charSU3(35,n?)) ) redefine i "0";
+        .sort
+#enddo
+
+#do i=1,1
+        id, once charSU3(B35,n?) = 2+2/z1^(3*n)+z1^(3*n)+z1^(4*n)/z2^(5*n)+z1^(2*n)/z2^(4*n)+z1^(5*n)/z2^(4*n)+z2^(-3*n)+(2*z1^(3*n))/z2^(3*n)+1/(z1^(2*n)*z2^(2*n))+(2*z1^n)/z2^(2*n)+z1^(4*n)/z2^(2*n)+1/(z1^(4*n)*z2^n)+2/(z1^n*z2^n)+(2*z1^(2*n))/z2^n+z2^n/z1^(5*n)+(2*z2^n)/z1^(2*n)+2*z1^n*z2^n+z2^(2*n)/z1^(4*n)+(2*z2^(2*n))/z1^n+z1^(2*n)*z2^(2*n)+2*z2^(3*n)+z2^(3*n)/z1^(3*n)+z2^(4*n)/z1^(2*n)+z1^n*z2^(4*n)+z2^(5*n)/z1^n;
+        if ( match(charSU3(B35,n?)) ) redefine i "0";
         .sort
 #enddo
 
