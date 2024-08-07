@@ -30,15 +30,15 @@ Symbol B3,B6,B10,B15;
     Drop HS;
     .sort
 #else
-	#write "Running DECO 1.0."
+	#write "Running DECO 1.1beta."
 #endif
-#redefine DEFScalar "0"
-#redefine DEFFermion "0"
-#redefine DEFLHFermion "0"
-#redefine DEFRHFermion "0"
-#redefine DEFDiracFermion "0"
-#redefine DEFFieldStrength "0"
-#redefine DEFGravity "0"
+#define DEFScalar "0"
+#define DEFFermion "0"
+#define DEFLHFermion "0"
+#define DEFRHFermion "0"
+#define DEFDiracFermion "0"
+#define DEFFieldStrength "0"
+#define DEFGravity "0"
 *
 *	Variable that keeps track of mass dimension
 *
