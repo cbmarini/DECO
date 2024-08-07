@@ -474,8 +474,8 @@ id charSU2(1,n?) = 1;
 #enddo
 
 #do i=1,1
-        id, once charSU2(4,n?) = y^(3*n)+y^(1*n)+y^(-1*n)+y^(-3*n);
-        if ( match(charSU2(4,n?)) ) redefine i "0";
+        id, once charSU2(rep?{>3},n?) = sum_(jj,-(rep-1),rep-1,2,y^(jj*n));
+        if ( match(charSU2(rep?{>3},n?)) ) redefine i "0";
         .sort
 #enddo
 
