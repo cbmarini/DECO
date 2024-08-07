@@ -519,28 +519,21 @@ Local HS = HS[1];
 *
 *******************************************************
 id charSU3(1,n?) = 1;
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*       Character of fundamental representation (3)
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*--#[ Character of fundamental and anti-fundamental representation (3 and B/B3) :
 #do i=1,1
         id, once charSU3(3,n?) = 1/z2^n + z2^n/z1^n + z1^n;
         if ( match(charSU3(3,n?)) ) redefine i "0";
         .sort
 #enddo
 
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*       Character of anti fundamental representation (B)
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 id charSU3(B3,n?) = charSU3(B,n);
 #do i=1,1
         id, once charSU3(B,n?) = 1/z1^n + z1^n/z2^n + z2^n;
         if ( match(charSU3(B,n?)) ) redefine i "0";
         .sort
 #enddo
-
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*       Character of 6 dimensional representation (6 & B6)
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*--#]
+*--#[ Character of 6 dimensional representation (6 & B6) :
 #do i=1,1
         id, once charSU3(6,n?) = z1^(-n)+z1^(2*n)+z2^(-2*n)+z1^n/z2^n+z2^n+z2^(2*n)/z1^(2*n);
         if ( match(charSU3(6,n?)) ) redefine i "0";
@@ -552,19 +545,15 @@ id charSU3(B3,n?) = charSU3(B,n);
         if ( match(charSU3(B6,n?)) ) redefine i "0";
         .sort
 #enddo
-
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*      Character of adjoint representation (8)
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*--#]
+*--#[ Character of adjoint representation (8) :
 #do i=1,1
        id, once charSU3(8,n?) = z1^n*z2^n+ z2^(2*n)/z1^n + z1^(2*n)/z2^n + 2 + z1^n/z2^(2*n) + z2^n/z1^(2*n) + 1/(z1^n*z2^n);
        if ( match(charSU3(8,n?)) ) redefine i "0";
        .sort
 #enddo
-
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*       Character of 10 dimensional representation (10 & B10)
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*--#] 
+*--#[ Character of 10 dimensional representation (10 & B10) :
 #do i=1,1
         id, once charSU3(10,n?) = 1+z1^(3*n)+z2^(-3*n)+z1^(2*n)/z2^n+z2^n/z1^(2*n)+z2^(3*n)/z1^(3*n)+z1^n*(z2^(-2*n)+z2^n)+(z2^(-n)+z2^(2*n))/z1^n;
         if ( match(charSU3(10,n?)) ) redefine i "0";
@@ -576,10 +565,8 @@ id charSU3(B3,n?) = charSU3(B,n);
         if ( match(charSU3(B10,n?)) ) redefine i "0";
         .sort
 #enddo
-
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*       Character of 15 dimensional representation (15 & B15, 15' and B15')
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*--#]
+*--#[ Character of 15 dimensional representation (15 & B15, 15' and B15') :
 #do i=1,1
         id, once charSU3(15,n?) = 2/z2^n+z1^(3*n)/z2^n+z2^(2*n)+z2^(2*n)/z1^(3*n)+z1^n*(2+z2^(-3*n))+z1^(2*n)*(z2^(-2*n)+z2^n)+(z2^(-2*n)+2*z2^n)/z1^n+(1+z2^(3*n))/z1^(2*n);
         if ( match(charSU3(15,n?)) ) redefine i "0";
@@ -603,10 +590,8 @@ id charSU3(B3,n?) = charSU3(B,n);
         if ( match(charSU3(Bp15,n?)) ) redefine i "0";
         .sort
 #enddo
-
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*       Character of 21 dimensional representation (21 & B21)
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*--#]
+*--#[ Character of 21 dimensional representation (21 & B21) :
 #do i=1,1
         id, once charSU3(21,n?) = z1^(-5*n)+z1^(-2*n)+z1^n+z1^(5*n)/z2^(5*n)+z1^(3*n)/z2^(4*n)+z1^n/z2^(3*n)+z1^(4*n)/z2^(3*n)+1/(z1^n*z2^(2*n))+z1^(2*n)/z2^(2*n)+z2^(-n)+1/(z1^(3*n)*z2^n)+z1^(3*n)/z2^n+z2^n/z1^(4*n)+z2^n/z1^n+z1^(2*n)*z2^n+z2^(2*n)+z2^(2*n)/z1^(3*n)+z2^(3*n)/z1^(2*n)+z1^n*z2^(3*n)+z2^(4*n)/z1^n+z2^(5*n);
         if ( match(charSU3(21,n?)) ) redefine i "0";
@@ -618,10 +603,8 @@ id charSU3(B3,n?) = charSU3(B,n);
         if ( match(charSU3(B21,n?)) ) redefine i "0";
         .sort
 #enddo
-
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*       Character of 24 dimensional representation (24 & B24)
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*--#]
+*--#[ Character of 24 dimensional representation (24 & B24) :
 #do i=1,1
         id, once charSU3(24,n?) = 2/z1^(2*n)+2*z1^n+z1^(3*n)/z2^(4*n)+z1^n/z2^(3*n)+z1^(4*n)/z2^(3*n)+1/(z1^n*z2^(2*n))+(2*z1^(2*n))/z2^(2*n)+2/z2^n+1/(z1^(3*n)*z2^n)+z1^(3*n)/z2^n+z2^n/z1^(4*n)+(2*z2^n)/z1^n+z1^(2*n)*z2^n+2*z2^(2*n)+z2^(2*n)/z1^(3*n)+z2^(3*n)/z1^(2*n)+z1^n*z2^(3*n)+z2^(4*n)/z1^n;
         if ( match(charSU3(24,n?)) ) redefine i "0";
@@ -633,19 +616,15 @@ id charSU3(B3,n?) = charSU3(B,n);
         if ( match(charSU3(B24,n?)) ) redefine i "0";
         .sort
 #enddo
-
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*       Character of 27 dimensional representation (27)
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*--#]
+*--#[ Character of 27 dimensional representation (27) :
 #do i=1,1
         id, once charSU3(27,n?) = (z1^(8*n)*z2^(2*n)+z2^(6*n)+z1^(6*n)*(1+z2^(3*n))^2+z1^(7*n)*(z2^n+z2^(4*n))+z1^(2*n)*(z2^n+z2^(4*n))^2+2*z1^(5*n)*(z2^(2*n)+z2^(5*n))+2*z1^(3*n)*(z2^(3*n)+z2^(6*n))+z1^n*(z2^(4*n)+z2^(7*n))+z1^(4*n)*(z2^n+3*z2^(4*n)+z2^(7*n)))/(z1^(4*n)*z2^(4*n));
         if ( match(charSU3(27,n?)) ) redefine i "0";
         .sort
 #enddo
-
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*       Character of 28 dimensional representation (28 & B28)
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*--#] 
+*--#[ Character of 28 dimensional representation (28 & B28) :
 #do i=1,1
         id, once charSU3(28,n?) = 1+z1^(-3*n)+z1^(3*n)+z1^(6*n)+z2^(-6*n)+z1^n/z2^(5*n)+1/(z1^n*z2^(4*n))+z1^(2*n)/z2^(4*n)+z2^(-3*n)+z1^(3*n)/z2^(3*n)+1/(z1^(2*n)*z2^(2*n))+z1^n/z2^(2*n)+z1^(4*n)/z2^(2*n)+1/(z1^n*z2^n)+z1^(2*n)/z2^n+z1^(5*n)/z2^n+z2^n/z1^(2*n)+z1^n*z2^n+z1^(4*n)*z2^n+z2^(2*n)/z1^(4*n)+z2^(2*n)/z1^n+z1^(2*n)*z2^(2*n)+z2^(3*n)+z2^(3*n)/z1^(3*n)+z2^(4*n)/z1^(5*n)+z2^(4*n)/z1^(2*n)+z2^(5*n)/z1^(4*n)+z2^(6*n)/z1^(6*n);
         if ( match(charSU3(28,n?)) ) redefine i "0";
@@ -657,10 +636,8 @@ id charSU3(B3,n?) = charSU3(B,n);
         if ( match(charSU3(B28,n?)) ) redefine i "0";
         .sort
 #enddo
-
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*       Character of 35 dimensional representation (35 & B35)
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*--#]
+*--#[ Character of 35 dimensional representation (35 & B35) :
 #do i=1,1
         id, once charSU3(35,n?) = 2+z1^(-3*n)+2*z1^(3*n)+z1^n/z2^(5*n)+1/(z1^n*z2^(4*n))+z1^(2*n)/z2^(4*n)+2/z2^(3*n)+z1^(3*n)/z2^(3*n)+1/(z1^(2*n)*z2^(2*n))+(2*z1^n)/z2^(2*n)+z1^(4*n)/z2^(2*n)+2/(z1^n*z2^n)+(2*z1^(2*n))/z2^n+z1^(5*n)/z2^n+(2*z2^n)/z1^(2*n)+2*z1^n*z2^n+z1^(4*n)*z2^n+z2^(2*n)/z1^(4*n)+(2*z2^(2*n))/z1^n+z1^(2*n)*z2^(2*n)+z2^(3*n)+(2*z2^(3*n))/z1^(3*n)+z2^(4*n)/z1^(5*n)+z2^(4*n)/z1^(2*n)+z2^(5*n)/z1^(4*n);
         if ( match(charSU3(35,n?)) ) redefine i "0";
@@ -672,10 +649,8 @@ id charSU3(B3,n?) = charSU3(B,n);
         if ( match(charSU3(B35,n?)) ) redefine i "0";
         .sort
 #enddo
-
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*       Character of 42 dimensional representation (42 & B42)
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*--#]
+*--#[ Character of 42 dimensional representation (42 & B42) :
 #do i=1,1
         id, once charSU3(42,n?) = 2/z1^(2*n)+3*z1^n+z1^(4*n)+z1^(2*n)/z2^(5*n)+z2^(-4*n)+z1^(3*n)/z2^(4*n)+1/(z1^(2*n)*z2^(3*n))+(2*z1^n)/z2^(3*n)+z1^(4*n)/z2^(3*n)+2/(z1^n*z2^(2*n))+(2*z1^(2*n))/z2^(2*n)+z1^(5*n)/z2^(2*n)+3/z2^n+1/(z1^(3*n)*z2^n)+(2*z1^(3*n))/z2^n+z2^n/z1^(4*n)+(3*z2^n)/z1^n+2*z1^(2*n)*z2^n+2*z2^(2*n)+(2*z2^(2*n))/z1^(3*n)+z1^(3*n)*z2^(2*n)+z2^(3*n)/z1^(5*n)+(2*z2^(3*n))/z1^(2*n)+z1^n*z2^(3*n)+z2^(4*n)/z1^(4*n)+z2^(4*n)/z1^n+z2^(5*n)/z1^(3*n);
         if ( match(charSU3(42,n?)) ) redefine i "0";
@@ -687,6 +662,7 @@ id charSU3(B3,n?) = charSU3(B,n);
         if ( match(charSU3(B42,n?)) ) redefine i "0";
         .sort
 #enddo
+*--#]
 
 #call terminate(SU3)
 
