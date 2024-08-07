@@ -9,7 +9,7 @@ CFunction Scal,Scalar,Grav,Gravity,FIELD,fill,f,FieldStrength,FS,R,DF;
 Autodeclare CFunction char,spin,LH,RH,Dirac;
 Autodeclare Symbol x,y,z,rep,w,im,var,r,p;
 Symbol i,ii,jj,field,rep,mass,n,B,maxn;
-Symbol B3,B6,B10,B15;
+Symbol B3,B6,B10,B15,Bp15;
 *--#]
 *--#[ HilbertSeries: 
 #procedure HilbertSeries(p)
@@ -578,7 +578,7 @@ id charSU3(B3,n?) = charSU3(B,n);
 #enddo
 
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*       Character of 15 dimensional representation (15 & B15)
+*       Character of 15 dimensional representation (15 & B15, 15' and B15')
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #do i=1,1
         id, once charSU3(15,n?) = 2/z2^n+z1^(3*n)/z2^n+z2^(2*n)+z2^(2*n)/z1^(3*n)+z1^n*(2+z2^(-3*n))+z1^(2*n)*(z2^(-2*n)+z2^n)+(z2^(-2*n)+2*z2^n)/z1^n+(1+z2^(3*n))/z1^(2*n);
@@ -591,6 +591,19 @@ id charSU3(B3,n?) = charSU3(B,n);
         if ( match(charSU3(B15,n?)) ) redefine i "0";
         .sort
 #enddo
+
+#do i=1,1
+        id, once charSU3(p15,n?) = z1^(-2*n)+z1^n+z1^(4*n)+z2^(-4*n)+z1^n/z2^(3*n)+1/(z1^n*z2^(2*n))+z1^(2*n)/z2^(2*n)+z2^(-n)+z1^(3*n)/z2^n+z2^n/z1^n+z1^(2*n)*z2^n+z2^(2*n)+z2^(2*n)/z1^(3*n)+z2^(3*n)/z1^(2*n)+z2^(4*n)/z1^(4*n);
+        if ( match(charSU3(p15,n?)) ) redefine i "0";
+        .sort
+#enddo
+
+#do i=1,1
+        id, once charSU3(Bp15,n?) = z1^(-4*n)+z1^(-n)+z1^(2*n)+z1^(4*n)/z2^(4*n)+z1^(2*n)/z2^(3*n)+z2^(-2*n)+z1^(3*n)/z2^(2*n)+1/(z1^(2*n)*z2^n)+z1^n/z2^n+z2^n+z2^n/z1^(3*n)+z2^(2*n)/z1^(2*n)+z1^n*z2^(2*n)+z2^(3*n)/z1^n+z2^(4*n);
+        if ( match(charSU3(Bp15,n?)) ) redefine i "0";
+        .sort
+#enddo
+
 
 #call terminate(SU3)
 
