@@ -1,29 +1,29 @@
-*--#[ Declarations: 
+*--#[ Declarations:
 *
 *	Declarations
 *
 #define DEFHS "0"
 
-CFunction SU3, SU2, U1, U1R, S4, A4, Zn;
+CFunction SU3, SU2, U1, U1R, S4, A4, Zn, D27;
 CFunction Scal,Scalar,Grav,Gravity,FIELD,fill,f,FieldStrength,FS,R,DF;
 Autodeclare CFunction char,spin,LH,RH,Dirac;
 Autodeclare Symbol x,y,z,rep,w,im,var,r,p;
 Symbol i,ii,jj,field,rep,mass,n,B,maxn;
 Symbol B3,B6,B10,B15,Bp15,B21,B24,B28,B35,B42;
 *--#]
-*--#[ HilbertSeries: 
+*--#[ HilbertSeries:
 #procedure HilbertSeries(p)
 *******************************************************
 *
 * Main procedure that runs the show
-* 	A lot of the computations are outsourced 
-*	to separate procedures 
+* 	A lot of the computations are outsourced
+*	to separate procedures
 *
 *******************************************************
 .sort
 *
 *       The following preprocessor variables are reset to zero
-*       in case one runs the HilbertSeries procedure more than 
+*       in case one runs the HilbertSeries procedure more than
 *       from the same FORM program.
 *
 #if (`DEFHS' == 1)
@@ -72,6 +72,7 @@ Drop Input;
 	id `field'(x?,?x1,A4(?rep),?x2) = `field'(x,?x1,?x2)*charA4(?rep,n);
 	id `field'(x?,?x1,S4(?rep),?x2) = `field'(x,?x1,?x2)*charS4(?rep,n);
 	id `field'(x?,?x1,Zn(?rep),?x2) = `field'(x,?x1,?x2)*charZn(?rep,n);
+	id `field'(x?,?x1,D27(?rep),?x2) = `field'(x,?x1,?x2)*charD27(?rep,n);
 	id `field'(x?) = `field'(x,n);
 #enddo
 .sort
@@ -79,7 +80,7 @@ Drop Input;
 *
 *	Internal notation for the groups and representations
 *
-#do group={U1,SU2,SU3,A4,S4}
+#do group={U1,SU2,SU3,A4,S4,D27}
 	id char`group'(?rep,n) = char`group'tmp(R(?rep),n);
 	repeat id char`group'tmp(?x1,R(x?,?rep),n) = char`group'tmp(?x1,R(x),R(?rep),n);
 	id char`group'tmp(?x1,R,n) = char`group'tmp(?x1,n);
@@ -189,12 +190,12 @@ id Gravity(field?,n?) = field^n;
 *
 #$terminate = 0;
 
-#do group={U1,U1R,SU2,SU3,Zn,A4,S4}
+#do group={U1,U1R,SU2,SU3,Zn,A4,S4,D27}
     #do ii=1,1
 	id char`group'tmp(R(?rep),?x,n?) = char`group'(?rep,n)*char`group'tmp(?x,n);
 	id char`group'tmp(n?) = 1;
 	#call `group'symmetry
-	
+
 	if (match(char`group'tmp(?x))) redefine ii "0";
 	.sort: `group' symmetries done;
     #enddo
@@ -219,7 +220,7 @@ Local P = 0 +
 .sort
 
 #do kk=1,1
-        id, once mass^ii?*f(n?) 
+        id, once mass^ii?*f(n?)
 		= mass^ii*sum_(jj,1,'MASSDIM','p'^(n*jj)*mass^(2*n*jj)*charSO31(R(1/2,1/2),n*jj)/jj);
         if ( count(f,1) ) redefine kk "0";
         .sort
@@ -242,23 +243,23 @@ Drop P;
 *******************************************************
 #switch `field'
 	#case Scalar
-	Local ScalarArgumentPE 
+	Local ScalarArgumentPE
 		= sum_(ii,1,'MASSDIM',mass^(2*ii)*Scal(ii)*(1-`EOM'*`p'^(2*ii)*mass^(2*2*ii))*Momentum(ii)/ii);
 	#break
         #case FieldStrength
-        Local FieldStrengthArgumentPE 
+        Local FieldStrengthArgumentPE
 		= sum_(ii,1,'MASSDIM',mass^(2*2*ii)*FS(ii)*(charLorentzSpin1(ii)-'EOM'*2*'p'^ii*mass^(2*ii)*charSO31(R(1/2,1/2),ii)+'EOM'*2*'p'^(2*ii)*mass^(2*2*ii))*Momentum(ii)/ii);
         #break
         #case Fermion
-        Local FermionArgumentPE 
+        Local FermionArgumentPE
 		= sum_(ii,1,'MASSDIM','numFermGen'*mass^(3*ii)*(-1)^(ii+1)*(charFermion(ii) - 'EOM'*'p'^ii*mass^(2*ii)*charFermionEOM(ii))*Momentum(ii)/ii);
         #break
         #case Gravity
-        Local GravityArgumentPE 
+        Local GravityArgumentPE
 		= sum_(i,1,'MASSDIM',mass^(2*2*i)*Grav(i)*(spin2(i)-'EOM'*'p'^i*mass^(2*i)*spin32(i)+'EOM'*'p'^(2*i)*mass^(2*2*i)*charLorentzSpin1(i))*Momentum(i)/i);
         #break
         #case Ibp
-        Local IbpArgumentPE 
+        Local IbpArgumentPE
 		= sum_(ii,1,'MASSDIM', -'p'^ii*mass^(2*ii)*charSO31(R(1/2,1/2),ii)/ii);
         #break
 #endswitch
@@ -277,7 +278,7 @@ Local `field'PE = sum_(ii,0,'MASSDIM',f^ii/fac_(ii));
 
 Unhide;
 Drop `field'ArgumentPE;
-.sort: `field' PE expanded; 
+.sort: `field' PE expanded;
 #endprocedure
 *--#]
 *--#[ multiplyPE:
@@ -360,9 +361,9 @@ Drop FermionPE;
 *       Characters for left handed, right handed and Dirac fermions
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #do i=1,1
-        id, once charFermion(n?) 
-		= 'DEFLHFermion'*charSO31(R(1/2,0),n)*LHF(n) 
-		+ 'DEFRHFermion'*charSO31(R(0,1/2),n)*RHF(n) 
+        id, once charFermion(n?)
+		= 'DEFLHFermion'*charSO31(R(1/2,0),n)*LHF(n)
+		+ 'DEFRHFermion'*charSO31(R(0,1/2),n)*RHF(n)
 		+ 'DEFDiracFermion'*(charSO31(R(1/2,0),n)+ charSO31(R(0,1/2),n))*DF(n);
         if ( count(charFermion,1) ) redefine i "0";
         .sort
@@ -373,9 +374,9 @@ Drop FermionPE;
 *       and Dirac fermions
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #do i=1,1
-        id, once charFermionEOM(n?) 
+        id, once charFermionEOM(n?)
 		= 'DEFRHFermion'*charSO31(R(1/2,0),n)*RHF(n)
-		+ 'DEFLHFermion'*charSO31(R(0,1/2),n)*LHF(n) 
+		+ 'DEFLHFermion'*charSO31(R(0,1/2),n)*LHF(n)
 		+ 'DEFDiracFermion'*(charSO31(R(0,1/2),n) + charSO31(R(1/2,0),n))*DF(n);
         if ( count(charFermionEOM,1) ) redefine i "0";
         .sort
@@ -396,8 +397,8 @@ Drop FermionPE;
 *       Characters to subtract the EOM of gravity/Weyl tensor
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #do i=1,1
-        id, once spin32(n?) 
-		= (charSO31(R(1/2,0),3*n) + charSO31(R(1/2,0),n))*charSO31(R(0,1/2),n) 
+        id, once spin32(n?)
+		= (charSO31(R(1/2,0),3*n) + charSO31(R(1/2,0),n))*charSO31(R(0,1/2),n)
 		+ charSO31(R(1/2,0),n)*(charSO31(R(0,1/2),3*n) + charSO31(R(0,1/2),n));
         if ( count(spin32,1) ) redefine i "0";
         .sort
@@ -452,7 +453,7 @@ Local HS = HS[1] - HS[y2^(-2)];
 
 #endprocedure
 *--#]
-*--#[ SU2symmetry: 
+*--#[ SU2symmetry:
 #procedure SU2symmetry
 *******************************************************
 *
@@ -511,7 +512,7 @@ Local HS = HS[1];
 .sort
 #endprocedure
 *--#]
-*--#[ SU3symmetry: 
+*--#[ SU3symmetry:
 #procedure SU3symmetry
 *******************************************************
 *
@@ -552,7 +553,7 @@ id charSU3(B3,n?) = charSU3(B,n);
        if ( match(charSU3(8,n?)) ) redefine i "0";
        .sort
 #enddo
-*--#] 
+*--#]
 *--#[ Character of 10 dimensional representation (10 & B10) :
 #do i=1,1
         id, once charSU3(10,n?) = 1+z1^(3*n)+z2^(-3*n)+z1^(2*n)/z2^n+z2^n/z1^(2*n)+z2^(3*n)/z1^(3*n)+z1^n*(z2^(-2*n)+z2^n)+(z2^(-n)+z2^(2*n))/z1^n;
@@ -623,7 +624,7 @@ id charSU3(B3,n?) = charSU3(B,n);
         if ( match(charSU3(27,n?)) ) redefine i "0";
         .sort
 #enddo
-*--#] 
+*--#]
 *--#[ Character of 28 dimensional representation (28 & B28) :
 #do i=1,1
         id, once charSU3(28,n?) = 1+z1^(-3*n)+z1^(3*n)+z1^(6*n)+z2^(-6*n)+z1^n/z2^(5*n)+1/(z1^n*z2^(4*n))+z1^(2*n)/z2^(4*n)+z2^(-3*n)+z1^(3*n)/z2^(3*n)+1/(z1^(2*n)*z2^(2*n))+z1^n/z2^(2*n)+z1^(4*n)/z2^(2*n)+1/(z1^n*z2^n)+z1^(2*n)/z2^n+z1^(5*n)/z2^n+z2^n/z1^(2*n)+z1^n*z2^n+z1^(4*n)*z2^n+z2^(2*n)/z1^(4*n)+z2^(2*n)/z1^n+z1^(2*n)*z2^(2*n)+z2^(3*n)+z2^(3*n)/z1^(3*n)+z2^(4*n)/z1^(5*n)+z2^(4*n)/z1^(2*n)+z2^(5*n)/z1^(4*n)+z2^(6*n)/z1^(6*n);
@@ -682,7 +683,7 @@ Local HS = HS[z2^(-1)];
 
 #endprocedure
 *--#]
-*--#[ A4symmetry: 
+*--#[ A4symmetry:
 #procedure A4symmetry
 *******************************************************
 *
@@ -712,7 +713,7 @@ id w^2 = -1-w;
 .sort
 #endprocedure
 *--#]
-*--#[ S4symmetry: 
+*--#[ S4symmetry:
 #procedure S4symmetry
 *******************************************************
 *
@@ -740,7 +741,7 @@ Local HS = 1/24*(
 		+ 8*HS*replace_(var1,1,varp,1 ,var21,w ,var22,w^2,var31,1 ,var32,w^2,var33,w ,varp31,1,varp32,w   ,varp33,w^2)
 	);
 *
-* Use: 
+* Use:
 *   im^2 = -1.
 *   w = Exp(2*pi*I/3), so w^3 = 1 and 1 + w + w^2 = 0.
 *
@@ -750,7 +751,7 @@ id w^2 = -1-w;
 .sort
 #endprocedure
 *--#]
-*--#[ Znsymmetry: 
+*--#[ Znsymmetry:
 #procedure Znsymmetry
 *******************************************************
 *
@@ -769,7 +770,7 @@ id w = 0;
 .sort
 #endprocedure
 *--#]
-*--#[ U1Rsymmetry: 
+*--#[ U1Rsymmetry:
 #procedure U1Rsymmetry
 *******************************************************
 *
@@ -790,23 +791,70 @@ Local HS = HS[xr^$rem];
 .sort
 #endprocedure
 *--#]
-*--#[ terminate: 
+*--#[ D27symmetry:
+#procedure D27symmetry
+*******************************************************
+*
+*       Δ(27) symmetry
+*
+*******************************************************
+id charD27(00,n?) = var00^n;
+id charD27(01,n?) = var01^n;
+id charD27(02,n?) = var02^n;
+id charD27(10,n?) = var10^n;
+id charD27(11,n?) = var11^n;
+id charD27(12,n?) = var12^n;
+id charD27(20,n?) = var20^n;
+id charD27(21,n?) = var21^n;
+id charD27(22,n?) = var22^n;
+id charD27(3,n?) = var30^n + var31^n + var32^n;
+id charD27(p3,n?) = varp30^n + varp31^n + varp32^n;
+.sort
+
+#call terminate(D27)
+
+Local HS = 1/27*(
+		+ 1*HS*replace_(var00,1,var01,1  ,var02,1  ,var10,1  ,var11,1  ,var12,1  ,var20,1  ,var21,1  ,var22,1  ,var30,1  ,var31,1  ,var32,1  ,varp30,1  ,varp31,1  ,varp32,1  )
+		+ 1*HS*replace_(var00,1,var01,1  ,var02,1  ,var10,1  ,var11,1  ,var12,1  ,var20,1  ,var21,1  ,var22,1  ,var30,w^2,var31,w^2,var32,w^2,varp30,w,  varp31,w  ,varp32,w  )
+		+ 1*HS*replace_(var00,1,var01,1  ,var02,1  ,var10,1  ,var11,1  ,var12,1  ,var20,1  ,var21,1  ,var22,1  ,var30,w  ,var31,w  ,var32,w  ,varp30,w^2,varp31,w^2,varp32,w^2)
+
+		+ 3*HS*replace_(var00,1,var01,w  ,var02,w^2,var10,1  ,var11,w  ,var12,w^2,var20,1  ,var21,w  ,var22,w^2,var30,1  ,var31,w  ,var32,w^2,varp30,1  ,varp31,w  ,varp32,w^2)
+                + 3*HS*replace_(var00,1,var01,w^2,var02,w  ,var10,1  ,var11,w^2,var12,w  ,var20,1  ,var21,w^2,var22,w  ,var30,1  ,var31,w  ,var32,w^2,varp30,1  ,varp31,w^2,varp32,w  )
+
+                + 3*HS*replace_(var00,1,var01,1  ,var02,1  ,var10,w  ,var11,w  ,var12,w  ,var20,w^2,var21,w^2,var22,w^2,var30,1  ,var31,w^2,var32,w  ,varp30,1  ,varp31,w  ,varp32,w^2)
+                + 3*HS*replace_(var00,1,var01,w  ,var02,w^2,var10,w  ,var11,w^2,var12,1  ,var20,w^2,var21,1  ,var22,w  ,var30,1  ,var31,w^2,var32,w  ,varp30,1  ,varp31,w  ,varp32,w^2)
+                + 3*HS*replace_(var00,1,var01,w^2,var02,w  ,var10,w  ,var11,1  ,var12,w^2,var20,w^2,var21,w  ,var22,1  ,var30,1  ,var31,w^2,var32,w  ,varp30,1  ,varp31,w  ,varp32,w^2)
+
+                + 3*HS*replace_(var00,1,var01,1  ,var02,1  ,var10,w^2,var11,w^2,var12,w^2,var20,w  ,var21,w  ,var22,w  ,var30,1  ,var31,w^2,var32,w  ,varp30,1  ,varp31,w^2,varp32,w  )
+                + 3*HS*replace_(var00,1,var01,w  ,var02,w^2,var10,w^2,var11,1  ,var12,w  ,var20,w  ,var21,w^2,var22,1  ,var30,1  ,var31,w^2,var32,w  ,varp30,1  ,varp31,w^2,varp32,w  )
+                + 3*HS*replace_(var00,1,var01,w^2,var02,w  ,var10,w^2,var11,w  ,var12,1  ,var20,w  ,var21,1  ,var22,w^2,var30,1  ,var31,w^2,var32,w  ,varp30,1  ,varp31,w^2,varp32,w  )
+	);
+*
+* Use w = Exp(2*pi*I/3), so
+* 	w^3 = 1 and 1 + w + w^2 = 0.
+*
+id w^3 = 1;
+id w^2 = -1-w;
+.sort
+#endprocedure
+*--#]
+*--#[ terminate:
 #procedure terminate(group)
 *******************************************************
 *
-*       This procecure checks if the charges are 
+*       This procecure checks if the charges are
 *	correctly defined by the user.
 *
 *******************************************************
 if (match(char`group'(?x))) $terminate = 1;
 .sort
-	
+
 #if (`$terminate' == 1)
 	#write "Program terminated during symmetries of `group'.\nCheck user input, e.g. charges etc."
 	#terminate
 #endif
 .sort
-	
+
 #endprocedure
 *--#]
 *--#[ counting:
@@ -833,10 +881,10 @@ if (match(char`group'(?x))) $terminate = 1;
         .sort
 #endprocedure
 *--#]
-*--#[ saveto: 
+*--#[ saveto:
 #procedure saveto(expr, file)
 *****************************************************************
-* Save a given Local expression `expr' to a Mathematica 
+* Save a given Local expression `expr' to a Mathematica
 *	file `file'.
 *****************************************************************
     format Mathematica;
